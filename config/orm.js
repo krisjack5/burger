@@ -16,7 +16,6 @@ function objToSql(ob) {
   var arr = [];
 
   for (var key in ob) {
-    if (Object.hasOwnProperty.call(ob, key)) {
       arr.push(key + "=" + ob[key]);
     }
   }
@@ -24,7 +23,7 @@ function objToSql(ob) {
   return arr.toString();
 }
 
-var ORM = {
+var orm = {
   all: function(tableInput, cb) {
     var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {
@@ -71,21 +70,6 @@ var ORM = {
       cb(result);
     });
   },
-  delete: function(table, condition, cb) {
-    var queryString = "DELETE FROM " + table;
-    queryString += " WHERE ";
-    queryString += condition;
-
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-
-      cb(result);
-    });
-  }
-};
-
 
 
 module.exports = ORM;
